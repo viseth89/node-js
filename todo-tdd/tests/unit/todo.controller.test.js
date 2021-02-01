@@ -33,5 +33,27 @@ describe("TodoController.createTodo", () => {
         expect(res._isEndCalled()).toBeTruthy();
     });
     it("Should return json body in response", () => {
-    })
+        TodoModel.create.mockReturnValue(newTodo);
+        TodoController.createTodo(req, res, next);
+        expect(res._getJSONData()).toStrictEqual(newTodo);
+    });
 });
+
+
+
+    /*
+        expect(received).toBe(expected) // Object.is equality
+
+    If it should pass with deep equality, replace "toBe" with "toStrictEqual"
+
+    Expected: {"done": false, "title": "Make first unit test"}
+    Received: serializes to the same string
+
+      36 |         TodoModel.create.mockReturnValue(newTodo);
+      37 |         TodoController.createTodo(req, res, next);
+    > 38 |         expect(res._getJSONData()).toBe(newTodo);
+         |                                    ^
+      39 |     });
+      40 | });
+      41 | 
+    */
