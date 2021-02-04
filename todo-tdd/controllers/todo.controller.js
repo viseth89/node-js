@@ -1,8 +1,10 @@
 const TodoModel = require("../model/todo.model")
 
-exports.createTodo =  (req, res, next) => {
-    const createdModel =  TodoModel.create(req.body);
+exports.createTodo =  async (req, res, next) => {
+    const createdModel =  await TodoModel.create(req.body);
     res.status(201).json(createdModel);
+};
+
     // Res must append '.send()' or else it will return an error
     //         expect(res._isEndCalled()).toBeTruthy();
     // Related
@@ -13,5 +15,3 @@ exports.createTodo =  (req, res, next) => {
 
 
 
-
-};
