@@ -66,10 +66,10 @@ router.get("/:title", async(req,res) => {
 
 
 /* Put */
-router.put("/update:entryId", validateJWT, async(req, res) =>{
+router.put("/update/:entryId", validateJWT, async(req, res) =>{
     const { title, date, entry } = req.body.journal;
     const journalId = req.params.entryId;
-    const userId = res.user.id
+    const userId = req.user.id
 
     const query = {
         where: {
@@ -78,7 +78,7 @@ router.put("/update:entryId", validateJWT, async(req, res) =>{
         }
     };
 
-    const updateJournal  = {
+    const updatedJournal  = {
         title: title,
         date: date,
         entry: entry
@@ -86,7 +86,10 @@ router.put("/update:entryId", validateJWT, async(req, res) =>{
 
     try {
         const update = await JournalModel.update(updatedJournal, query); 
-        res.status(200).json(update);
+        res.status(200).json({
+            one:update,
+            two: updatedJournal
+        });
     } catch(err) {
         res.status(500).json({error:err})
     }
@@ -94,7 +97,7 @@ router.put("/update:entryId", validateJWT, async(req, res) =>{
 
 /* Delete */
 
-router.delete("/delete:id", validateJWT, async(req, res) => {
+router.delete("/delete/:id", validateJWT, async(req, res) => {
     const ownderId = req.user.id;
     const journalId = req.params.id;
 
