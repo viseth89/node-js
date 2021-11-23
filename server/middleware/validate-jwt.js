@@ -39,4 +39,5 @@ const validateJWT = async( req, res, next) => {
     }
 }
 
+validateJWT()
 module.exports = validateJWT
