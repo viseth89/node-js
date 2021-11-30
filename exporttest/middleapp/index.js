@@ -1,9 +1,11 @@
-const { Router } = require('express')
 var express = require('express')
 
-const function1 = require('../middleware/middle1')
-const function2 = require('../middleware/middle2')
-const function3 = require('../middleware/middle3')
+const five = require("./middleware/five")
+const four = require("./middleware/five")
+const middleware1 = require("./middleware/middle1")
+const function2 = require("./middleware/middle2")
+const function3 = require("./middleware/middle3")
+
 const formidable = require("formidable");
 
 const form = formidable({
@@ -13,7 +15,7 @@ const form = formidable({
 
 var app = express()
 
-app.get("/",function1, function2, function3,   (req, res) => {
+app.get("/", middleware1, function2, function3,   (req, res) => {
     console.log('original route')
     
     form.parse(req, (err, fields, files) => {
@@ -30,24 +32,37 @@ app.get("/",function1, function2, function3,   (req, res) => {
     res.send("hey there get")
 })
 
-app.get("/one",function1, function2, function3,   (req, res) => {
+app.get("/one", function2, function3,   (req, res) => {
     console.log('original route')
     res.send("hey there one")
 })
 
-app.post("/two",function1, function2, function3,   (req, res) => {
+app.post("/two", middleware1, function2, function3, (req, res) => {
+
+
+
     console.log('original two route')
-    form.parse(req, (err, fields, files) => {
-        if (err) {
-          next(err);
-          return;
-        }
+    // form.parse(req, (err, fields, files) => {
+    //     if (err) {
+    //       next(err);
+    //       return;
+    //     }
 
-        console.log(fields)
-        console.log(files)
-    })
+    //     // console.log(fields)
+    //     // console.log(files)
+    // })
 
-    res.send("hey there two")
+    return res.send(req.dataFromMiddleware1)
+})
+app.post("/three", function3, (req, res) => {
+    console.log('original three route')
+
+    res.send("hey there route three")
+})
+
+app.post("/four", four, (req, res) => {
+
+    res.send("hey there route three")
 })
 
 app.listen(3000, () => {
