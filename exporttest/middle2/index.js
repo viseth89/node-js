@@ -25,6 +25,22 @@ app.post("/three", middle1, middle2, (req, res) => {
 
 })
 
+app.post("/four", middle1, middle2, (req, res) => {
+    // console.log(variablefrommiddle1)
+    var tyson;
+    sadie = {}
+    var cocoa;
+
+
+    console.log(tyson)
+    console.log(sadie)
+    console.log(cocoa)
+    console.log(value1)
+
+    res.send('three')
+
+})
+
 app.listen(3000, () => {
     console.log(`[Server]: App is listening on 3000`)
 })

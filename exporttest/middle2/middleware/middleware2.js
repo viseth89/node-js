@@ -16,10 +16,10 @@ const middle2 = (req, res, next) => {
 
 
     console.log('18')
-    // console.log(value1)
+    console.log(value1)
     console.log('20')
     // console.log(value2)
-    console.log(global.value2)
+    // console.log(global.value2)
     // console.log(files)
 
 
