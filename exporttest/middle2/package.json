@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1041.0",
     "formidable": "^2.0.1"
   }
 }
